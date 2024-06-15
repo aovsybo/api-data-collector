@@ -15,17 +15,21 @@ def get_api_client(api_client: APIClient) -> OzonAPIClient:
 
 
 @app.post("/get-actions/")
-async def send_request(client: OzonAPIClient = Depends(get_api_client)):
+async def get_actions(client: OzonAPIClient = Depends(get_api_client)):
     return await client.get_actions()
 
 
 @app.post("/get-actions-candidates/")
-async def send_request(action: Action, client: OzonAPIClient = Depends(get_api_client)):
+async def get_actions_candidates(action: Action, client: OzonAPIClient = Depends(get_api_client)):
     return await client.get_actions_candidates(action)
 
 
 @app.post("/activate-actions-products/")
-async def send_request(action: Action, products: list[Product], client: OzonAPIClient = Depends(get_api_client)):
+async def activate_actions_products(
+        action: Action,
+        products: list[Product],
+        client: OzonAPIClient = Depends(get_api_client)
+):
     return await client.activate_actions_products(action, products)
 
 
